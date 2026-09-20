@@ -3,18 +3,19 @@
 
 int main()
 {
-    unsigned char n, k, kt, a;
-    std::scanf("%hhu%hhu", &n, &k);
+    unsigned n, k, kt, a;
+    std::scanf("%u%u", &n, &k);
     for (kt = k; kt; --kt)
     {
-        std::scanf("%hhu", &a);
+        std::scanf("%u", &a);
         if (a == 0)break;
     }
     if (kt == 0 && n != k)
     {
         kt = k - 1;
-        for (unsigned char at{a}; at == a && kt < n; std::scanf("%hhu", &at))
-            ++kt;    }
+        for (unsigned at{a}; at == a && kt < n; std::scanf("%u", &at))
+            ++kt;
+    }
     else kt = k - kt;
-    std::printf("%hhu", kt);
+    std::printf("%u", kt);
 }

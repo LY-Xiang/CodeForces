@@ -1,7 +1,8 @@
 #include <cstdio>
+
 int main()
 {
-    unsigned char n,m;
-    std::scanf("%hhu%hhu",&n,&m);
-    std::printf("%hhu",n*m/2);
+    unsigned n, m;
+    std::scanf("%u%u", &n, &m);
+    std::printf("%u", n * m / 2);
 }

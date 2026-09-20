@@ -2,7 +2,7 @@
 
 int main()
 {
-    unsigned char n;
-    std::scanf("%hhu", &n);
+    unsigned n;
+    std::scanf("%u", &n);
     std::puts((n % 2 == 0) && (n >= 4) ? "YES" : "NO");
 }
