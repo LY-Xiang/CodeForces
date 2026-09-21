@@ -1,15 +1,8 @@
 #include <cstdio>
 #include <memory>
 
-static void solve(const unsigned n, unsigned t, const char* s, char* out)
+static void solve(const unsigned n, const unsigned t, const char* s, char* out)
 {
-    if (t > n) t = n;
-    if (n == 0)
-    {
-        out[0] = '\0';
-        return;
-    }
-
     const std::unique_ptr<unsigned[]> h{new unsigned[n + 1]};
     unsigned m{0};
     h[0] = 0;
@@ -65,16 +58,11 @@ int main()
 {
     unsigned n, t;
     std::scanf("%u%u%*c", &n, &t);
-    const std::unique_ptr<char[]> s{new char[n > 0 ? n : 1]};
-    size_t got{0};
-    while (got < n)
+    const std::unique_ptr<char[]> s{new char[n + 1]};
+    for (std::size_t got{0}; got < n; got += std::fread(s.get() + got, 1, n - got, stdin))
     {
-        const size_t k = std::fread(s.get(), 1, n - got, stdin);
-        if (k == 0) break;
-        got += k;
     }
     const std::unique_ptr<char[]> out{new char[n + 1]};
     solve(n, t, s.get(), out.get());
     std::fwrite(out.get(), 1, n, stdout);
-    std::putchar('\n');
 }
