@@ -1,10 +1,9 @@
 #include <cstdio>
-#include <cmath>
 
 int main()
 {
-    unsigned a, b;
+    unsigned a, b, t{0};
     std::scanf("%u%u", &a, &b);
-    std::printf(
-        "%u", 1 + static_cast<unsigned>(std::log(static_cast<double>(b) / a) / std::log(1.5)));
+    for (; a <= b; a *= 3, b *= 2) ++t;
+    std::printf("%u", t);
 }

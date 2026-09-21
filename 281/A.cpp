@@ -1,10 +1,10 @@
-#include <cstdio>
 #include <cctype>
+#include <cstdio>
 
 int main()
 {
-    char buf[1000];
-    std::putchar(std::toupper(std::getchar()));
-    std::fgets(buf, 1000 - 1,stdin);
-    std::puts(buf);
+    int c1;
+    if ((c1 = std::getchar()) != EOF) std::putchar(std::toupper(c1));
+    for (int c; (c = std::getchar()) != '\n' && c != EOF;) std::putchar(c);
+    std::putchar('\n');
 }

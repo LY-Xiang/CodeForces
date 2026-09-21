@@ -16,5 +16,5 @@ int main()
             std::getchar();
         }
     }
-    std::printf("%hd", x);
+    std::printf("%d", x);
 }

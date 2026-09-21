@@ -3,15 +3,18 @@
 
 int main()
 {
-    char a[100 + 1], *p{a};
-    int b;
-    for (std::scanf("%s%*c", a); *p != '\0'; ++p)
-        if ((b = std::toupper(std::getchar())) != (*p = std::toupper(*p)))
+    char a[100 + 1], b[100 + 1];
+    std::scanf("%s %s", a, b);
+    for (int i{0}; i <= 100; ++i)
+    {
+        const int x{std::toupper(a[i])}, y{std::toupper(b[i])};
+        if (x != y)
         {
-            if (*p < b)
-                std::putchar('-');
+            if (x < y) std::putchar('-');
             std::putchar('1');
             return 0;
         }
+        if (x == 0) break;
+    }
     std::putchar('0');
 }
