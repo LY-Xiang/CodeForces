@@ -5,25 +5,34 @@ int main()
     unsigned n;
     for (std::scanf("%u%*c", &n); n; --n)
     {
-        int t[10];
+        char w[10];
         unsigned l{0};
-        for (std::putchar(std::getchar());
-             l != 10;
-             ++l)
-            if ((t[l] = std::getchar()) == '\n' || t[l] == EOF)
-                break;
-        if (t[l] == '\n' || t[l] == EOF)
-            for (unsigned lt{0}; lt != l + 1; ++lt)
-                std::putchar(t[lt]);
+        int a;
+        while (l != 10 && (a = std::getchar()) != '\n' && a != EOF)
+            w[l++] = static_cast<char>(a);
+        if (a == '\n' || a == EOF)
+        {
+            for (unsigned i{0}; i != l; ++i) std::putchar(w[i]);
+        }
         else
         {
-            for (t[0] = t[9];
-                 (t[9] = std::getchar()) != '\n' && t[9] != EOF;
-                 ++l)
-                t[0] = t[9];
-            std::printf("%u", l - 1);
-            std::putchar(t[0]);
-            std::putchar(t[9]);
+            a = std::getchar();
+            if (a == '\n' || a == EOF)
+            {
+                for (unsigned i{0}; i != 10; ++i) std::putchar(w[i]);
+            }
+            else
+            {
+                char last{static_cast<char>(a)};
+                unsigned len{11};
+                while ((a = std::getchar()) != '\n' && a != EOF)
+                {
+                    last = static_cast<char>(a);
+                    ++len;
+                }
+                std::printf("%c%u%c", w[0], len - 2, last);
+            }
         }
+        std::putchar('\n');
     }
 }

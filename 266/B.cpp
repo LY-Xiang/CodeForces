@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <memory>
 
 static void solve(const unsigned n, unsigned t, const char* s, char* out)
 {
@@ -9,15 +10,19 @@ static void solve(const unsigned n, unsigned t, const char* s, char* out)
         return;
     }
 
-    auto* h{new unsigned[n + 1]};
+    const std::unique_ptr<unsigned[]> h{new unsigned[n + 1]};
     unsigned m{0};
     h[0] = 0;
     for (unsigned i{0}; i != n; ++i)
         h[i + 1] = m += s[i] == 'B';
 
     const unsigned qcap{(n + 2) / 2 + 1};
-    unsigned *q[2]{new unsigned[qcap], new unsigned[qcap]},
-             qh[2]{}, qt[2]{}, hi{0};
+    const std::unique_ptr<unsigned[]> qb[2]{
+        std::unique_ptr<unsigned[]>(new unsigned[qcap]),
+        std::unique_ptr<unsigned[]>(new unsigned[qcap])
+    };
+    unsigned* q[2]{qb[0].get(), qb[1].get()};
+    unsigned qh[2]{}, qt[2]{}, hi{0};
 
     unsigned prev{};
     for (unsigned x{0}; x != n; ++x)
@@ -54,28 +59,22 @@ static void solve(const unsigned n, unsigned t, const char* s, char* out)
     }
     out[n - 1] = m - prev == 1 ? 'B' : 'G';
     out[n] = '\0';
-
-    delete[] h;
-    delete[] q[0];
-    delete[] q[1];
 }
 
 int main()
 {
     unsigned n, t;
     std::scanf("%u%u%*c", &n, &t);
-    const auto s = new char[n > 0 ? n : 1];
+    const std::unique_ptr<char[]> s{new char[n > 0 ? n : 1]};
     size_t got{0};
     while (got < n)
     {
-        const size_t k = std::fread(s + got, 1, n - got, stdin);
+        const size_t k = std::fread(s.get(), 1, n - got, stdin);
         if (k == 0) break;
         got += k;
     }
-    const auto out = new char[n + 1];
-    solve(n, t, s, out);
-    std::fwrite(out, 1, n, stdout);
+    const std::unique_ptr<char[]> out{new char[n + 1]};
+    solve(n, t, s.get(), out.get());
+    std::fwrite(out.get(), 1, n, stdout);
     std::putchar('\n');
-    delete[] s;
-    delete[] out;
 }
