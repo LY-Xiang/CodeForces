@@ -1,24 +1,23 @@
-#include<cstdio>
-
-static inline void putb(char*& o, const char* s)
-{
-    for (int k{0}; s[k]; *o++ = s[k++]);
-}
+#include <cstdio>
+#include <cstring>
+#include <cstddef>
 
 int main()
 {
-    unsigned n;
-    std::scanf("%u", &n);
-    static char out[1024];
-    char* o{out};
-    for (unsigned i{1}; i < n; ++i)
+    unsigned n{};
+    if (std::scanf("%u", &n) != 1) return 0;
+
+    static char out[12 * 100 - 3];
+    char* p{out};
+    std::memcpy(p, "I hate", 6);
+    p += 6;
+    for (unsigned i{2}; i <= n; ++i)
     {
-        putb(o, "I ");
-        putb(o, i & 1 ? "hate" : "love");
-        putb(o, " that ");
+        std::memcpy(p, i & 1U ? " that I hate" : " that I love", 12);
+        p += 12;
     }
-    putb(o, "I ");
-    putb(o, n & 1 ? "hate" : "love");
-    putb(o, " it");
-    std::fwrite(out, 1, o - out, stdout);
+    std::memcpy(p, " it", 3);
+    p += 3;
+    std::fwrite(out, 1, static_cast<std::size_t>(p - out), stdout);
+    return 0;
 }

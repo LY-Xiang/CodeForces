@@ -5,12 +5,9 @@ int main()
     unsigned n, s{0}, m{0};
     for (std::scanf("%u", &n); n; --n)
     {
-        unsigned i;
-        std::scanf("%u", &i);
-        s -= i;
-        std::scanf("%u", &i);
-        s += i;
-        if (m < s)m = s;
+        unsigned at, bt;
+        std::scanf("%u%u", &at, &bt);
+        if (m < (s = s - at + bt))m = s;
     }
     std::printf("%u\n", m);
 }
