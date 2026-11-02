@@ -16,8 +16,10 @@
 *.dylib
 *.dll
 
-# Fortran module files
+# Fortran module files. Scoped to the pattern's own intent: a bare *.mod would
+# also swallow Go's go.mod, which is source rather than a build product.
 *.mod
+!go.mod
 *.smod
 
 # Compiled Static libraries
@@ -30,3 +32,16 @@
 *.exe
 *.out
 *.app
+
+# Isolated implementation worktrees
+.worktrees/
+
+# bench binary cache (content-hashed entries plus their digest manifest)
+bench/bin/
+.bench-cache.digest
+
+# backup
+backup/
+
+# Python bytecode from bench/tools scripts
+__pycache__/
