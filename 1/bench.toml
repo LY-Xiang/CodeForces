@@ -1,0 +1,12 @@
+# Bench coverage for this contest.
+#
+# Each table declares only maxgen, so --bench times the largest input
+# and --all has nothing to check: no reference solution is registered
+# for these problems.
+#
+# The spec is a built-in generator kind plus its arguments. See
+# bench/src/genlib/kinds.go for the byte shape each kind writes.
+
+# A -- n m a -- three integers on one line
+[A]
+maxgen = "fixed %S 3 1 1000000000"

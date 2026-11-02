@@ -1,0 +1,22 @@
+# Bench coverage for this contest.
+#
+# Each table declares only maxgen, so --bench times the largest input
+# and --all has nothing to check: no reference solution is registered
+# for these problems.
+#
+# The spec is a built-in generator kind plus its arguments. See
+# bench/src/genlib/kinds.go for the byte shape each kind writes.
+
+# F -- t, then per case "n m" followed by m edge pairs.
+#
+# This row appears only when the generated input happens to be a tree. The
+# solution assumes the edge list is one rooted at a centre: it reads a[0] of the
+# lowest-degree vertex and indexes adj[adj[v][0]], so a vertex with no edges is an
+# out-of-bounds read and the run dies on a non-zero exit (0xC0000005 on Windows,
+# reported as "solution exited with code 3221225477"). None of the built-in kinds
+# can emit "n m" followed by m edges whose endpoints stay inside 1..n and leave no
+# vertex isolated -- pairs writes fixed-width rows, and t2/nk write a header plus n
+# values, not m pairs. The shape below is the nearest available, and it stays for
+# the day an edge-list generator exists.
+[F]
+maxgen = "pairs %S 2 2 1 2"

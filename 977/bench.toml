@@ -1,0 +1,15 @@
+# Bench coverage for this contest.
+#
+# Each table declares only maxgen, so --bench times the largest input
+# and --all has nothing to check: no reference solution is registered
+# for these problems.
+#
+# The spec is a built-in generator kind plus its arguments. See
+# bench/src/genlib/kinds.go for the byte shape each kind writes.
+
+# A -- n k, both at the ceiling. This is the problem's advertised worst case
+# and it genuinely takes about 1.7 s of wall time, because the loop subtracts k
+# from n one step at a time. Slower than every other row here, and correct.
+
+[A]
+maxgen = "fixed %S 2 1000000000 1000000000"

@@ -1,0 +1,28 @@
+# Bench coverage for this contest.
+#
+# Each table declares only maxgen, so --bench times the largest input
+# and --all has nothing to check: no reference solution is registered
+# for these problems.
+#
+# The spec is a built-in generator kind plus its arguments. See
+# bench/src/genlib/kinds.go for the byte shape each kind writes.
+
+# A -- t then t (n, char, string)
+[A]
+maxgen = "oneshot %S 100 1 100"
+
+# B -- t then t (n + n values)
+[B]
+maxgen = "oneshot %S 100 1 100"
+
+# C -- t then n x and n values
+[C]
+maxgen = "t2 %S 100 5 1 12"
+
+# D -- t then t (n + permutation)
+[D]
+maxgen = "perm %S 100 200"
+
+# F1 -- n q, n values, q queries
+[F1]
+maxgen = "queries %S 50 50 1000 1"

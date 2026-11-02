@@ -1,0 +1,30 @@
+# Bench coverage for this contest.
+#
+# Each table declares only maxgen, so --bench times the largest input
+# and --all has nothing to check: no reference solution is registered
+# for these problems.
+#
+# The spec is a built-in generator kind plus its arguments. See
+# bench/src/genlib/kinds.go for the byte shape each kind writes.
+
+# A -- t then a ten-letter word per case
+[A]
+maxgen = "letters %S 10"
+
+# B -- t then per-case strings
+[B]
+maxgen = "oneshot %S 100 0 1"
+
+# C -- t then t (n + n 0/1 values)
+[C]
+maxgen = "oneshot %S 100 0 1"
+
+# E -- t then t n m and n*m values
+[E]
+maxgen = "nk %S 50 10 1 10"
+
+# EUsr -- the draft of E, kept beside it. Same input shape; the id cannot carry
+# the hyphen, so the table name differs from the file name and src names the file.
+[EUsr]
+src = "717343/E-usr.cpp"
+maxgen = "nk %S 50 10 1 10"

@@ -1,0 +1,16 @@
+# Bench coverage for this contest.
+#
+# Each table declares only maxgen, so --bench times the largest input
+# and --all has nothing to check: no reference solution is registered
+# for these problems.
+#
+# The spec is a built-in generator kind plus its arguments. See
+# bench/src/genlib/kinds.go for the byte shape each kind writes.
+
+# A -- t then n k and n values
+[A]
+maxgen = "nk %S 100 20 1 50"
+
+# B -- n q, n values, q two-wide queries
+[B]
+maxgen = "queries %S 100 100 15 2"

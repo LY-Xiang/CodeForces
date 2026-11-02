@@ -1,0 +1,41 @@
+# Bench coverage for this contest.
+#
+# Each table declares only maxgen, so --bench times the largest input
+# and --all has nothing to check: no reference solution is registered
+# for these problems.
+#
+# The spec is a built-in generator kind plus its arguments. See
+# bench/src/genlib/kinds.go for the byte shape each kind writes.
+#
+# This contest reads through a hand-written fast-IO layer whose readU spins
+# forever when the stream ends early (gc() returns 0 at EOF and the digit loop
+# never terminates). Every input here therefore has to satisfy the exact token
+# count of the solution, which is why the shapes below are conservative.
+
+# A -- t, then per case four numbers.
+[A]
+maxgen = "nk %S 20 5 1 20"
+
+# B -- t, then per case three numbers.
+[B]
+maxgen = "nk %S 20 5 1 20"
+
+# C -- t, then per case n followed by n single-bit characters.
+#
+# readBit consumes only '0' and '1', skipping every other byte. ints writes one
+# header token per case and then exactly n values, so nothing is left over to
+# shift the bit stream; nk would write a second header token and the digits in it
+# would be consumed as bits.
+[C]
+maxgen = "ints %S 2 3 0 1"
+
+# D -- t, then per case n followed by n integers. ints writes exactly that,
+# whereas nk would emit a second header token that the per-case reader would
+# consume as the first value, desynchronising every later case.
+[D]
+maxgen = "ints %S 2 4 1 10"
+
+# E -- t, then per case "n k" followed by n values. The values index a sieve, so
+# they stay small.
+[E]
+maxgen = "nk %S 2 4 1 10"
