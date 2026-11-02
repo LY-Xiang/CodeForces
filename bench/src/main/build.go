@@ -19,6 +19,7 @@ import (
 
 	execpkg "codeforces/bench/src/exec"
 	"codeforces/bench/src/genlib"
+	"codeforces/bench/src/text"
 )
 
 // CompileTimeout bounds one compiler invocation. The per-case deadline lives in
@@ -100,12 +101,54 @@ func (e *Env) Build(src, out string, flags []string) bool {
 	if result.TimedOut || result.Code != 0 {
 		return false
 	}
-	// Every kernel compiled here is expected warning-free: any stderr is a
-	// build failure.
+	// A non-zero exit is the build failing; a warning is not. The compiler says
+	// so on stderr without changing its status, and a solution that compiles and
+	// runs correctly still has a timing to report -- refusing it would hide a real
+	// measurement over a stylistic complaint. Stderr is kept instead of discarded:
+	// it reaches the user through BuildNote, and the row still gets gated on the
+	// binary actually running.
 	if len(result.Stderr) > 0 {
-		return false
+		noteBuildOutput(src, argv, result.Stderr)
 	}
 	return e.installStaged(stagedPath, entry, out)
+}
+
+// buildNotes collects compiler diagnostics for sources that nonetheless built. It
+// is process-wide because Build is called from three places (solution, reference,
+// generator) and none of them owns a reporting channel; the CLI drains it once at
+// the end so the notes land after the rows they belong to.
+var buildNotes []buildNote
+
+type buildNote struct {
+	src  string
+	argv []string
+	out  []byte
+}
+
+// noteBuildOutput records a build that succeeded with diagnostics on stderr.
+//
+// Warnings are not failures: the compiler exited zero, so the binary exists and
+// runs. Refusing the build would turn a stylistic complaint into a missing
+// measurement, which is the harness inventing a failure the compiler did not
+// report. The note keeps the text instead of dropping it.
+func noteBuildOutput(src string, argv []string, stderr []byte) {
+	buildNotes = append(buildNotes, buildNote{
+		src:  src,
+		argv: slices.Clone(argv),
+		out:  slices.Clone(stderr),
+	})
+}
+
+// flushBuildNotes prints every recorded build diagnostic, indented under one
+// header per source. Nothing is printed when no build produced any.
+func flushBuildNotes() {
+	for _, note := range buildNotes {
+		reportf("%scompiled with warnings: %s\n", msgPrefix, text.Text(note.src))
+		for line := range strings.SplitSeq(strings.TrimRight(string(note.out), "\n"), "\n") {
+			reportf("  %s\n", line)
+		}
+	}
+	buildNotes = nil
 }
 
 // cachedBinary reports whether entry is a verified hit. The bool says the caller

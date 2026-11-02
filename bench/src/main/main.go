@@ -103,7 +103,10 @@ func usagef(format string, args ...any) error {
 
 // run is the whole CLI and returns the process exit code.
 func run(args []string) int {
+	// Notes are drained before the final flush. Defers run last-in-first-out, so
+	// registering the flush first makes it run second.
 	defer flushStdout()
+	defer flushBuildNotes()
 
 	opts, err := parseArgs(args)
 	if err != nil {
@@ -384,12 +387,12 @@ func timeLimitLabel(p registry.Problem) string {
 func runBenchMode(env *Env, chosen []registry.Problem) int {
 	failed := false
 	for _, problem := range chosen {
-		row, ok := env.RunBench(problem)
-		if !ok {
-			// Names no cause on purpose: RunBench also refuses a killed run, whose
-			// wall time would be the kill's latency, and a floor it could not
-			// measure.
-			reportf("FAIL      %s gate=-   timing refused: the case could not be measured\n", problem.ID)
+		row, err := env.RunBench(problem)
+		if err != nil {
+			// The reason names the step that refused, so an author can tell a
+			// source that does not compile from a registry whose generator
+			// produces an input the solution cannot read.
+			reportf("FAIL      %s gate=-   timing refused: %s\n", problem.ID, text.Text(err.Error()))
 			failed = true
 			continue
 		}

@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	execpkg "codeforces/bench/src/exec"
 	"codeforces/bench/src/peakmem"
 	"codeforces/bench/src/registry"
+	"codeforces/bench/src/text"
 )
 
 // nopSource is the empty program whose launch and dynamic-link cost is the floor a
@@ -83,13 +85,14 @@ func formatBytes(n int64) string {
 
 // RunBench times one problem's solution against the empty-program launch floor,
 // always on the problem's largest input (MaxGen), since a timing row is about the
-// advertised worst case. ok is false whenever the case cannot be trusted -- a
-// build or generator failure, a claim contradicting its bytes, or a timed run
-// whose wall time is the kill's latency -- rather than a fabricated measurement.
-func (e *Env) RunBench(p registry.Problem) (BenchRow, bool) {
+// advertised worst case. The returned BenchRow is usable only when err is nil;
+// otherwise err says which step refused, because a bare "could not be measured"
+// leaves an author with no idea whether to fix the source, the registry or the
+// machine.
+func (e *Env) RunBench(p registry.Problem) (BenchRow, error) {
 	work, err := os.MkdirTemp("", "bench-time-"+p.ID+"-*")
 	if err != nil {
-		return BenchRow{}, false
+		return BenchRow{}, fmt.Errorf("cannot create a work directory: %w", err)
 	}
 	defer func() { _ = os.RemoveAll(work) }()
 	suffix := binarySuffix()
@@ -98,33 +101,33 @@ func (e *Env) RunBench(p registry.Problem) (BenchRow, bool) {
 	// not one whose timing means anything.
 	solution, failed := e.buildSolution(work, p)
 	if failed != nil {
-		return BenchRow{}, false
+		return BenchRow{}, fmt.Errorf("solution did not build: %s", text.Text(failed.Detail))
 	}
 	input, _, _, failed := generateInput(e, p, work, p.MaxGen, 1)
 	if failed != nil {
-		return BenchRow{}, false
+		return BenchRow{}, fmt.Errorf("generator produced no usable input: %s", text.Text(failed.Detail))
 	}
 
 	nopSrc := filepath.Join(work, "nop.cpp")
 	if err := os.WriteFile(nopSrc, []byte(nopSource), 0o644); err != nil {
-		return BenchRow{}, false
+		return BenchRow{}, fmt.Errorf("cannot write the launch floor: %w", err)
 	}
 	nop := filepath.Join(work, "nop"+suffix)
 	if !e.Build(nopSrc, nop, kernelFlags) {
-		return BenchRow{}, false
+		return BenchRow{}, fmt.Errorf("launch floor did not build")
 	}
 
 	// Timed in the same loop as the solution, so both see the same machine. The
 	// memory reading rides along with the timing runs rather than costing its own
 	// launches, and it is taken on the fastest trial so it belongs to the same
 	// execution the wall time came from.
-	floor, ok := e.measureRuns([]string{nop}, input)
+	floor, detail, ok := e.measureRuns([]string{nop}, input, "launch floor")
 	if !ok {
-		return BenchRow{}, false
+		return BenchRow{}, fmt.Errorf("launch floor could not be timed: %s", detail)
 	}
-	measured, ok := e.measureRuns([]string{solution}, input)
+	measured, detail, ok := e.measureRuns([]string{solution}, input, "solution")
 	if !ok {
-		return BenchRow{}, false
+		return BenchRow{}, fmt.Errorf("solution could not be timed: %s", detail)
 	}
 	wallUs, floorUs := measured.wallUs, floor.wallUs
 	// A hiccup on the floor alone can put the solution "faster" than an empty
@@ -136,7 +139,7 @@ func (e *Env) RunBench(p registry.Problem) (BenchRow, bool) {
 		WallUs: wallUs, WorkUs: workUs, FloorUs: floorUs,
 		TL:        timeLimitLabel(p),
 		PeakBytes: measured.peakBytes, FloorPeakBytes: floor.peakBytes,
-	}, true
+	}, nil
 }
 
 // runMeasurement is one program's fastest trial, with the peak memory observed in
@@ -157,15 +160,27 @@ type runMeasurement struct {
 // A child killed at the deadline has the kill's latency as its wall time and a zero
 // exit code, so TimedOut is checked too. Any contaminated run refuses the whole
 // row, even in a trial that was not the best.
-func (e *Env) measureRuns(argv []string, input []byte) (runMeasurement, bool) {
+//
+// label names the program being timed and is used only to phrase the refusal, so a
+// caller can tell the launch floor apart from the solution. The detail string says
+// which run failed and how; it is empty when ok is true.
+func (e *Env) measureRuns(argv []string, input []byte, label string) (runMeasurement, string, bool) {
 	best := runMeasurement{wallUs: -1, peakBytes: peakmem.Unknown}
-	for range benchTrials {
+	for trial := 1; trial <= benchTrials; trial++ {
 		started := time.Now()
 		peak := peakmem.Unknown
-		for range benchRuns {
+		for run := 1; run <= benchRuns; run++ {
 			result := execpkg.RunMeasured(argv, input, 0)
-			if result.TimedOut || result.Code != 0 {
-				return runMeasurement{}, false
+			if result.TimedOut {
+				return runMeasurement{}, fmt.Sprintf("%s timed out (trial %d, run %d)", label, trial, run), false
+			}
+			if result.Code != 0 {
+				detail := fmt.Sprintf("%s exited with code %d (trial %d, run %d)",
+					label, result.Code, trial, run)
+				if stderr := strings.TrimSpace(lossyString(result.Stderr)); stderr != "" {
+					detail += ": " + firstLine(stderr)
+				}
+				return runMeasurement{}, detail, false
 			}
 			// The largest sample in the trial: a run whose measurement failed reports
 			// unknown, and unknown must not be mistaken for small.
@@ -179,7 +194,16 @@ func (e *Env) measureRuns(argv []string, input []byte) (runMeasurement, bool) {
 		}
 	}
 	if best.wallUs < 0 {
-		return runMeasurement{}, false
+		return runMeasurement{}, label + " produced no usable trial", false
 	}
-	return best, true
+	return best, "", true
+}
+
+// firstLine returns s up to its first newline, so a multi-line diagnostic stays
+// readable inside the one line a refusal is printed on.
+func firstLine(s string) string {
+	if before, _, found := strings.Cut(s, "\n"); found {
+		return before
+	}
+	return s
 }
