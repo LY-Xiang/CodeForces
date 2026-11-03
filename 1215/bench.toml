@@ -10,4 +10,3 @@
 # C -- n then two strings of n letters
 [C]
 maxgen = "letters %S 20"
-hash = { "1215/C.exe" = "1a157f19352072e0df2992d4a2cfca7c89676d085b643f3b23c05959abdb02fe" }

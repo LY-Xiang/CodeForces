@@ -10,4 +10,3 @@
 # A -- n m
 [A]
 maxgen = "fixed %S 2 1 16"
-hash = { "50/A.exe" = "5570252196ec9af6ea5e96600b09ce3c77132062ce2602ecb8aeedfd1b51c6eb" }

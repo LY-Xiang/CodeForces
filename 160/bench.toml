@@ -10,4 +10,3 @@
 # A -- n then n values counted into buckets
 [A]
 maxgen = "oneshot %S 100 1 100"
-hash = { "160/A.exe" = "f3f1a963301508b86cc91e90300079fd0214d1ca3ea590bad361be5b3659856e" }

@@ -10,7 +10,6 @@
 # A -- t then t (n + n 0/1 chars)
 [A]
 maxgen = "oneshot %S 100 0 1"
-hash = { "2261/A.exe" = "674a68986f89a7bb1bf8c8fcd260b6bfc30fb02c98ca213aabbec962a3cdda19" }
 
 # C -- t then t (n + n values).
 #
@@ -20,4 +19,3 @@ hash = { "2261/A.exe" = "674a68986f89a7bb1bf8c8fcd260b6bfc30fb02c98ca213aabbec96
 # is timed and the warning is printed under the results instead.
 [C]
 maxgen = "oneshot %S 100 0 1000"
-hash = { "2261/C.exe" = "484e423f90412275371f3d3a1a8417dde965024e51fbd7401d81cc8154ac56f0" }

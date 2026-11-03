@@ -10,4 +10,3 @@
 # A -- n then n magnet lines
 [A]
 maxgen = "oneshot %S 100 0 1"
-hash = { "344/A.exe" = "49bd716a2e6490d59f32c162869d1f8f0cee24d0535e174d06d9b5943c68954b" }

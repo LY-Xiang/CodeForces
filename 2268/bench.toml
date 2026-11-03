@@ -10,9 +10,7 @@
 # A -- t then n k and n values
 [A]
 maxgen = "nk %S 100 20 1 50"
-hash = { "2268/A.exe" = "5b0d7b7ee3b85638b498eac3816cccd8f5213503609a1517bba145b06df7674e" }
 
 # B -- n q, n values, q two-wide queries
 [B]
 maxgen = "queries %S 100 100 15 2"
-hash = { "2268/B.exe" = "fe946ee9b511eddf2f3899ee989c3c720cbb23a7f7c0ad0911bcbc91d9082128" }

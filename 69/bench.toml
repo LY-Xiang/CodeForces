@@ -10,4 +10,3 @@
 # A -- t then t rows of three
 [A]
 maxgen = "ints %S 100 3 1 100"
-hash = { "69/A.exe" = "51645db6bf800515038f0b581f6f8193dce7c4be12181b2c608a4e8ef3850518" }

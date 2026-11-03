@@ -10,4 +10,3 @@
 # A -- n then n values: fixed gives exactly that
 [A]
 maxgen = "fixed %S 1 1 100"
-hash = { "405/A.exe" = "21f3a33f279196a61cd915f56d6fb192d6dd50723a0062572ba687b31eb58321" }

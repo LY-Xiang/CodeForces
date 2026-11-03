@@ -10,4 +10,3 @@
 # A -- one weight
 [A]
 maxgen = "fixed %S 1 1 100"
-hash = { "4/A.exe" = "fa1d24e87c79ae37715dbdb439ea63c23acb8f00511f863a81cf9205f7288823" }

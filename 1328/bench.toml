@@ -10,4 +10,3 @@
 # A -- t then t pairs
 [A]
 maxgen = "pairs %S 100 2 1 100"
-hash = { "1328/A.exe" = "18341d981e3cd77a0502279869a3665d4c28a46c8ee0cdfd1abea85f8bb487a9" }

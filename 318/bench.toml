@@ -10,4 +10,3 @@
 # A -- n k
 [A]
 maxgen = "fixed %S 2 1 1000000"
-hash = { "318/A.exe" = "154464ff5407276e1ac664c5ccc11279ef9c4595bf7ab0c34517bf5efc85c8fd" }

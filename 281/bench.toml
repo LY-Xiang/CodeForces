@@ -10,4 +10,3 @@
 # A -- one capitalised word
 [A]
 maxgen = "letters %S 25"
-hash = { "281/A.exe" = "08c82a6fd49f9a70d61031b5e7e71256c140da3726627510a7096951513ec104" }

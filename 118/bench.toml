@@ -10,4 +10,3 @@
 # A -- one word of letters
 [A]
 maxgen = "letters %S 25"
-hash = { "118/A.exe" = "f4a5529d2a156dcf945dcc3ac30bc76908fe229a07b7f97c65bef608035b2c64" }

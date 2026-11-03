@@ -10,4 +10,3 @@
 # A -- t then t lines of three 0/1 chars
 [A]
 maxgen = "oneshot %S 100 0 1"
-hash = { "231/A.exe" = "460d639ecd11322eb6d3cca9f5f498e695a70a01a72017220cf285b46ecf6fb5" }

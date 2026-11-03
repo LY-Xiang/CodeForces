@@ -10,11 +10,9 @@
 # A -- n then n chars -- letters covers the chars
 [A]
 maxgen = "letters %S 20"
-hash = { "266/A.exe" = "f4bdf1f63603d908d25848526246fee40fd289c9d91c1135e699dd6b189a8207" }
 
 # B -- n t, then exactly n characters. oneshot writes "<n>" then n values,
 # whose digits and spaces are always at least n characters, so the fread that
 # needs exactly n of them never hits EOF and cannot spin.
 [B]
 maxgen = "oneshot %S 1000 0 1"
-hash = { "266/B.exe" = "2b6299d0ed8c4fbad8c4ec35733eb32cca5c9ce2a660ad9009b705efa59e1340" }

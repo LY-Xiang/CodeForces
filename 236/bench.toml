@@ -10,4 +10,3 @@
 # A -- one line of letters
 [A]
 maxgen = "letters %S 20"
-hash = { "236/A.exe" = "e193646d9fad881eec621dbde0774433e966127bd3ca56800e9ebbdcec5fc1a1" }

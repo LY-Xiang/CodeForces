@@ -10,4 +10,3 @@
 # A -- 25 cells for the 5x5 grid
 [A]
 maxgen = "oneshot %S 25 0 1"
-hash = { "263/A.exe" = "650a3a80d2063695c5d9333673f53587df60226e184a58ab76731026ba406cd4" }

@@ -33,6 +33,10 @@
 *.out
 *.app
 
+# bench build state: the hash of what each compiled product was built from.
+# The harness regenerates it, so it never belongs in the repository.
+bench.lock
+
 # Isolated implementation worktrees
 .worktrees/
 

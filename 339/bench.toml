@@ -10,4 +10,3 @@
 # A -- a summand in 1..3 only
 [A]
 maxgen = "fixed %S 1 1 1"
-hash = { "339/A.exe" = "8ea632d0d090c18799d9226edd0b2106cc45b904d482641a72fc36e0393dc410" }

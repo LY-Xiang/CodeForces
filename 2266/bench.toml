@@ -15,12 +15,10 @@
 # A -- t, then per case four numbers.
 [A]
 maxgen = "nk %S 20 5 1 20"
-hash = { "2266/A.exe" = "1ceed55c3e0450b71b4b6b0633e6792219505470356001750128b2f621ab1bb2" }
 
 # B -- t, then per case three numbers.
 [B]
 maxgen = "nk %S 20 5 1 20"
-hash = { "2266/B.exe" = "fcbdfbe33d3559df6950d1fdf879314390b097f98d1ebbae2574e7aa5b643b04" }
 
 # C -- t, then per case n followed by n single-bit characters.
 #
@@ -30,17 +28,14 @@ hash = { "2266/B.exe" = "fcbdfbe33d3559df6950d1fdf879314390b097f98d1ebbae2574e7a
 # would be consumed as bits.
 [C]
 maxgen = "ints %S 2 3 0 1"
-hash = { "2266/C.exe" = "1c67e9ef0ed850e185896048c123b8ebbc5145787046ab627b05ea3a1bb06e0a" }
 
 # D -- t, then per case n followed by n integers. ints writes exactly that,
 # whereas nk would emit a second header token that the per-case reader would
 # consume as the first value, desynchronising every later case.
 [D]
 maxgen = "ints %S 2 4 1 10"
-hash = { "2266/D.exe" = "953cf55dc1fd13c91a1769cd1b2dc745a1ad2406d85d455c9e27c5fb8b17eaa9" }
 
 # E -- t, then per case "n k" followed by n values. The values index a sieve, so
 # they stay small.
 [E]
 maxgen = "nk %S 2 4 1 10"
-hash = { "2266/E.exe" = "705da70df482fa64ef5c63945bce051f07f3b84c921800bcf5f987c4692ce840" }

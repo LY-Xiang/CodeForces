@@ -10,4 +10,3 @@
 # A -- n then n 0/1 values
 [A]
 maxgen = "oneshot %S 100 0 1"
-hash = { "96/A.exe" = "8c46d57aa9d0dc5e1a90e85f1d2176f530e96850833ddc2d20811dabaa98c408" }

@@ -10,4 +10,3 @@
 # A -- digits; letters keeps the stream alphabetic
 [A]
 maxgen = "letters %S 5"
-hash = { "110/A.exe" = "00201d5b43745f49f6d0c400cc66a4cf5e3a77a82075b3f1e6630e2ce62b27a0" }

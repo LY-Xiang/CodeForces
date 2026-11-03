@@ -10,4 +10,3 @@
 # A -- statement lines such as ++X
 [A]
 maxgen = "prog %S 20"
-hash = { "282/A.exe" = "f8afb17eb032065f619d260c2488fd2fb230708f1554245395f0db4d72f9c3f9" }
