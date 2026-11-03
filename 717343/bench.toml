@@ -10,21 +10,26 @@
 # A -- t then a ten-letter word per case
 [A]
 maxgen = "letters %S 10"
+hash = { "717343/A.exe" = "11ea17a3873d6295c8827bf07243b78d2440e1f457afb7098a568a1fb44c2c75" }
 
 # B -- t then per-case strings
 [B]
 maxgen = "oneshot %S 100 0 1"
+hash = { "717343/B.exe" = "95750c4550978fae798d9c87d91797cac81961eca3f9180da34bd42948935781" }
 
 # C -- t then t (n + n 0/1 values)
 [C]
 maxgen = "oneshot %S 100 0 1"
+hash = { "717343/C.exe" = "f16719c6bba3960f1fba0e112e6abe37df66bdb030a2c940ea8acb13103fb8ae" }
 
 # E -- t then t n m and n*m values
 [E]
 maxgen = "nk %S 50 10 1 10"
+hash = { "717343/E.exe" = "bc3828ba9c14bdeb4002d2ef2518486efbb5a48daa9323e4a2ef5c14bdf79e91" }
 
 # EUsr -- the draft of E, kept beside it. Same input shape; the id cannot carry
 # the hyphen, so the table name differs from the file name and src names the file.
 [EUsr]
 src = "717343/E-usr.cpp"
 maxgen = "nk %S 50 10 1 10"
+hash = { "717343/E-usr.exe" = "868631508cfb485dccce28b2368a9640ee75e24460635ff005eb92da13577580" }

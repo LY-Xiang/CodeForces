@@ -10,3 +10,4 @@
 # A -- n then n words of at most 10
 [A]
 maxgen = "oneshot %S 100 1 10"
+hash = { "71/A.exe" = "791aded2ba51da647d0c01ed06a387ed5a32ed7e312cc16ff2ed25a4568a98f8" }

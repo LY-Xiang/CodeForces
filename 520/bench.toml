@@ -10,3 +10,4 @@
 # A -- n then one string of n letters
 [A]
 maxgen = "letters %S 26"
+hash = { "520/A.exe" = "045048cf6d614ee17b4fb65f529ca354025222d8e928f6ae5ea824ac76771e37" }

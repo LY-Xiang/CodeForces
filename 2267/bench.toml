@@ -10,19 +10,24 @@
 # A -- t then t (n, char, string)
 [A]
 maxgen = "oneshot %S 100 1 100"
+hash = { "2267/A.exe" = "da8fc43a2fc5275ba867d45d54edf2d8bdfcaeb7df19acbf45a0eab6047eea67" }
 
 # B -- t then t (n + n values)
 [B]
 maxgen = "oneshot %S 100 1 100"
+hash = { "2267/B.exe" = "633dafe811fcf2655dfaa0395189c7cfed2ff0c1f4cca5f19d1771c22edf7aca" }
 
 # C -- t then n x and n values
 [C]
 maxgen = "t2 %S 100 5 1 12"
+hash = { "2267/C.exe" = "cee2e4e2c16073bdd4194acff619de4566253add0ee793ad5d2fc934dfae1459" }
 
 # D -- t then t (n + permutation)
 [D]
 maxgen = "perm %S 100 200"
+hash = { "2267/D.exe" = "acace2885dfaad4bbb7cc1b68f34450ee391a226c8bbf125b01d12a5112dccc5" }
 
 # F1 -- n q, n values, q queries
 [F1]
 maxgen = "queries %S 50 50 1000 1"
+hash = { "2267/F1.exe" = "99bd21afbba120218d611c90c4324c1f06eb11ba93bc956b26b28aefe6c5fb42" }

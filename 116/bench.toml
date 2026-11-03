@@ -10,3 +10,4 @@
 # A -- t then t n k and n values
 [A]
 maxgen = "nk %S 100 20 1 50"
+hash = { "116/A.exe" = "84ec4464bad3a7a84234679c506583501a0bcf2fbb3bdfe69ae279f5805f3195" }

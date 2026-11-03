@@ -10,3 +10,4 @@
 # A -- n then a permutation of 1..n
 [A]
 maxgen = "perm %S 1 100"
+hash = { "136/A.exe" = "00e02dcad31302c28b818f73b9864b1f83ac192cfb8fce613c1c2b4375567b5c" }

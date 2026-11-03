@@ -10,3 +10,4 @@
 # A -- two words; letters gives one line
 [A]
 maxgen = "letters %S 20"
+hash = { "112/A.exe" = "69a01882b704730a4bd2cc8841a2c6378d7de9525bcaa005cc25c7f5d27f7a3b" }

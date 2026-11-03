@@ -10,3 +10,4 @@
 # A -- n then n pairs
 [A]
 maxgen = "pairs %S 100 2 1 10"
+hash = { "467/A.exe" = "e6a752181f2eb3434eb6d93759e0c143192cba2421ce570da4b152d4d0ec7abd" }

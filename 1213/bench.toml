@@ -10,3 +10,4 @@
 # D1 -- n k then n values
 [D1]
 maxgen = "oneshot %S 50 1 50"
+hash = { "1213/D1.exe" = "4a4ee9f1c75b960adc2d8e92cd70c591026547c4edae390f16112b3b1f1f168a" }

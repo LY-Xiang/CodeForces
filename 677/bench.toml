@@ -10,3 +10,4 @@
 # A -- n h is read as n then values
 [A]
 maxgen = "oneshot %S 50 1 100"
+hash = { "677/A.exe" = "a6b87320311a5a26a1c2e1aba2276ba038d1e27f9178193abaed0172a4138fae" }

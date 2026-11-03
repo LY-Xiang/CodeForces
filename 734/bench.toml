@@ -10,3 +10,4 @@
 # A -- n then n 0/1 characters
 [A]
 maxgen = "oneshot %S 100 0 1"
+hash = { "734/A.exe" = "2c2e8671eb2bc4ad6af197b3e14bbb52c582d52faf7a035a7ff7645f8d9b2b8c" }

@@ -10,3 +10,4 @@
 # A -- one printable-ASCII line
 [A]
 maxgen = "prog %S 100"
+hash = { "133/A.exe" = "ecd24e4d51067db5cbe759eb70f7cad08ad6bd674de186bd5e2030297e41e365" }

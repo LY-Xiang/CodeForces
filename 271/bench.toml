@@ -10,3 +10,4 @@
 # A -- one year
 [A]
 maxgen = "fixed %S 1 1 9000"
+hash = { "271/A.exe" = "40267e667b462c04afafb0670569dc7c0cb35fc2b6392c37bcef2b9d0b3485db" }

@@ -10,3 +10,4 @@
 # A -- one line of letters
 [A]
 maxgen = "letters %S 20"
+hash = { "59/A.exe" = "4e8e367f654ca29e0bf4442e2eb03321dcc76a3d935e976aa03a5af3e061b157" }

@@ -10,3 +10,4 @@
 # A -- four integers, no leading t
 [A]
 maxgen = "fixed %S 4 1 100"
+hash = { "228/A.exe" = "6fa9439e701c9db3b25405c4dcc6a52c74c4e79601322295e663ccdcfe46c5a5" }

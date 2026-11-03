@@ -10,3 +10,4 @@
 # A -- two lines: a word and a mask
 [A]
 maxgen = "letters %S 12"
+hash = { "61/A.exe" = "368408d624da53ef62a47970733c0eb8b6b8dd2803e7d8ee9661390971d45bc9" }

@@ -10,3 +10,4 @@
 # A -- one n
 [A]
 maxgen = "fixed %S 1 1 100"
+hash = { "705/A.exe" = "a934b837d5e5b0b3a172ea3b93943fab314d950fdb2f9f6ccc56ef1e24e3a40b" }

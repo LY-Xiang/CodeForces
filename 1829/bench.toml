@@ -20,3 +20,4 @@
 # the day an edge-list generator exists.
 [F]
 maxgen = "pairs %S 2 2 1 2"
+hash = { "1829/F.exe" = "8793ca99d5204d985b06d590ce4d8762bc290f93f97e6aeaf3fcb37081a2b372" }

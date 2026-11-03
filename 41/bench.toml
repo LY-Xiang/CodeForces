@@ -10,3 +10,4 @@
 # A -- a word, then its reverse on the next line
 [A]
 maxgen = "letters %S 25"
+hash = { "41/A.exe" = "f43e9572abc00b271c478dc2978c659dcfdacec2e03a9e24949f1402ff51aaf4" }

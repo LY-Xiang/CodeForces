@@ -10,3 +10,4 @@
 # B -- n then n values
 [B]
 maxgen = "oneshot %S 100 1 100"
+hash = { "200/B.exe" = "9b7e5b1e238df2257961365e15fe9d4f19039a2f8fc91d935c05c9d05f0e83ce" }

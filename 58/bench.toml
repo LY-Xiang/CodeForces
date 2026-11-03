@@ -10,3 +10,4 @@
 # A -- one word: can "hello" be picked out
 [A]
 maxgen = "letters %S 25"
+hash = { "58/A.exe" = "438079f98ee43df0ff6805093a3955c01bbeb2a6fdfbd14bfd37234a6e049970" }
